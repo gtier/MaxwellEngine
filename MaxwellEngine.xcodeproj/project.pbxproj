@@ -1,0 +1,341 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		854BD9C9220A4F5300975E99 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 854BD9C8220A4F5300975E99 /* main.cpp */; };
+		854BD9D1220A4F7E00975E99 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 854BD9D0220A4F7E00975E99 /* CoreVideo.framework */; };
+		854BD9D3220A4F8500975E99 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 854BD9D2220A4F8400975E99 /* IOKit.framework */; };
+		854BD9D5220A4F8C00975E99 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 854BD9D4220A4F8C00975E99 /* Cocoa.framework */; };
+		854BD9D7220A4F9700975E99 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 854BD9D6220A4F9600975E99 /* OpenGL.framework */; };
+		854BD9D9220A4FAB00975E99 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 854BD9D8220A4FAB00975E99 /* libglfw3.a */; };
+		854BD9DB220A508300975E99 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 854BD9DA220A508300975E99 /* glad.c */; };
+		854BD9DE220A516900975E99 /* MaxwellEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 854BD9DC220A516900975E99 /* MaxwellEngine.cpp */; };
+		854BD9E1220A562700975E99 /* RenderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 854BD9DF220A562700975E99 /* RenderObject.cpp */; };
+		8550A450220D14A900DF4FB4 /* ShaderFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8550A44E220D14A900DF4FB4 /* ShaderFile.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		854BD9C3220A4F5300975E99 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		854BD9C5220A4F5300975E99 /* MaxwellEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MaxwellEngine; sourceTree = BUILT_PRODUCTS_DIR; };
+		854BD9C8220A4F5300975E99 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		854BD9D0220A4F7E00975E99 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		854BD9D2220A4F8400975E99 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		854BD9D4220A4F8C00975E99 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		854BD9D6220A4F9600975E99 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		854BD9D8220A4FAB00975E99 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../../../GoogleDrive/cpp/OpenGL/libraries/lib/libglfw3.a; sourceTree = "<group>"; };
+		854BD9DA220A508300975E99 /* glad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glad.c; sourceTree = "<group>"; };
+		854BD9DC220A516900975E99 /* MaxwellEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MaxwellEngine.cpp; sourceTree = "<group>"; };
+		854BD9DD220A516900975E99 /* MaxwellEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MaxwellEngine.hpp; sourceTree = "<group>"; };
+		854BD9DF220A562700975E99 /* RenderObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderObject.cpp; sourceTree = "<group>"; };
+		854BD9E0220A562700975E99 /* RenderObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderObject.hpp; sourceTree = "<group>"; };
+		854BD9E2220A679800975E99 /* mes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mes.h; sourceTree = "<group>"; };
+		8550A44E220D14A900DF4FB4 /* ShaderFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderFile.cpp; sourceTree = "<group>"; };
+		8550A44F220D14A900DF4FB4 /* ShaderFile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderFile.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		854BD9C2220A4F5300975E99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				854BD9D9220A4FAB00975E99 /* libglfw3.a in Frameworks */,
+				854BD9D7220A4F9700975E99 /* OpenGL.framework in Frameworks */,
+				854BD9D5220A4F8C00975E99 /* Cocoa.framework in Frameworks */,
+				854BD9D3220A4F8500975E99 /* IOKit.framework in Frameworks */,
+				854BD9D1220A4F7E00975E99 /* CoreVideo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		854BD9BC220A4F5300975E99 = {
+			isa = PBXGroup;
+			children = (
+				854BD9C7220A4F5300975E99 /* MaxwellEngine */,
+				854BD9C6220A4F5300975E99 /* Products */,
+				854BD9CF220A4F7E00975E99 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		854BD9C6220A4F5300975E99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				854BD9C5220A4F5300975E99 /* MaxwellEngine */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		854BD9C7220A4F5300975E99 /* MaxwellEngine */ = {
+			isa = PBXGroup;
+			children = (
+				8550A44D220D146D00DF4FB4 /* Shaders */,
+				854BD9DA220A508300975E99 /* glad.c */,
+				854BD9C8220A4F5300975E99 /* main.cpp */,
+				854BD9DC220A516900975E99 /* MaxwellEngine.cpp */,
+				854BD9DD220A516900975E99 /* MaxwellEngine.hpp */,
+				854BD9DF220A562700975E99 /* RenderObject.cpp */,
+				854BD9E0220A562700975E99 /* RenderObject.hpp */,
+				854BD9E2220A679800975E99 /* mes.h */,
+				8550A44E220D14A900DF4FB4 /* ShaderFile.cpp */,
+				8550A44F220D14A900DF4FB4 /* ShaderFile.hpp */,
+			);
+			path = MaxwellEngine;
+			sourceTree = "<group>";
+		};
+		854BD9CF220A4F7E00975E99 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				854BD9D8220A4FAB00975E99 /* libglfw3.a */,
+				854BD9D6220A4F9600975E99 /* OpenGL.framework */,
+				854BD9D4220A4F8C00975E99 /* Cocoa.framework */,
+				854BD9D2220A4F8400975E99 /* IOKit.framework */,
+				854BD9D0220A4F7E00975E99 /* CoreVideo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8550A44D220D146D00DF4FB4 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		854BD9C4220A4F5300975E99 /* MaxwellEngine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 854BD9CC220A4F5300975E99 /* Build configuration list for PBXNativeTarget "MaxwellEngine" */;
+			buildPhases = (
+				854BD9C1220A4F5300975E99 /* Sources */,
+				854BD9C2220A4F5300975E99 /* Frameworks */,
+				854BD9C3220A4F5300975E99 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MaxwellEngine;
+			productName = MaxwellEngine;
+			productReference = 854BD9C5220A4F5300975E99 /* MaxwellEngine */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		854BD9BD220A4F5300975E99 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Griffin Dunaif";
+				TargetAttributes = {
+					854BD9C4220A4F5300975E99 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 854BD9C0220A4F5300975E99 /* Build configuration list for PBXProject "MaxwellEngine" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 854BD9BC220A4F5300975E99;
+			productRefGroup = 854BD9C6220A4F5300975E99 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				854BD9C4220A4F5300975E99 /* MaxwellEngine */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		854BD9C1220A4F5300975E99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				854BD9E1220A562700975E99 /* RenderObject.cpp in Sources */,
+				854BD9C9220A4F5300975E99 /* main.cpp in Sources */,
+				8550A450220D14A900DF4FB4 /* ShaderFile.cpp in Sources */,
+				854BD9DE220A516900975E99 /* MaxwellEngine.cpp in Sources */,
+				854BD9DB220A508300975E99 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		854BD9CA220A4F5300975E99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		854BD9CB220A4F5300975E99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		854BD9CD220A4F5300975E99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				"HEADER_SEARCH_PATHS[arch=*]" = /Users/griffin/GoogleDrive/cpp/OpenGL/libraries/include;
+				"LIBRARY_SEARCH_PATHS[arch=*]" = /Users/griffin/GoogleDrive/cpp/OpenGL/libraries/lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		854BD9CE220A4F5300975E99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		854BD9C0220A4F5300975E99 /* Build configuration list for PBXProject "MaxwellEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				854BD9CA220A4F5300975E99 /* Debug */,
+				854BD9CB220A4F5300975E99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		854BD9CC220A4F5300975E99 /* Build configuration list for PBXNativeTarget "MaxwellEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				854BD9CD220A4F5300975E99 /* Debug */,
+				854BD9CE220A4F5300975E99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 854BD9BD220A4F5300975E99 /* Project object */;
+}
