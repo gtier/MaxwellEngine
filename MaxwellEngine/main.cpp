@@ -15,9 +15,9 @@
 
 int main(int argc, const char * argv[]) {
     
-    mes::ShaderFile vertexShaderFile("/Users/griffin/Documents/cpp-projects/MaxwellEngine/MaxwellEngine/Shaders/vertexShader.txt");
+    mes::ShaderFile vertexShaderFile("/Users/griffin/Documents/cpp-projects/MaxwellEngine/MaxwellEngine/Shaders/vertexShader.glsl");
     
-    mes::ShaderFile fragmentShaderFile("/Users/griffin/Documents/cpp-projects/MaxwellEngine/MaxwellEngine/Shaders/fragmentShader.txt");
+    mes::ShaderFile fragmentShaderFile("/Users/griffin/Documents/cpp-projects/MaxwellEngine/MaxwellEngine/Shaders/fragmentShader.glsl");
     
     mes::MaxwellEngine engine(vertexShaderFile.read(), fragmentShaderFile.read());
     
@@ -26,6 +26,8 @@ int main(int argc, const char * argv[]) {
         -0.5, 0.5, 0,
         -0.1, 0.5, 0
     };
+    
+    
     
     std::vector<unsigned int> indices1 = {
         0,1,2
@@ -40,6 +42,22 @@ int main(int argc, const char * argv[]) {
     std::vector<unsigned int> indices2 = {
         0,1,2
     };
+    
+    mes::VectorVDO<float> vectorVDO;
+    {
+        using namespace mes;
+        Vec3f a, b;
+        Vec2f c;
+        a.x = 1;
+        b.y = 2;
+        c.y = 3;
+        VDO<float> vertData(a, b, c);
+        std::cout << vertData << std::endl;
+        std::cout << vertData.coordSize() << std::endl;
+        vectorVDO.getVector().push_back(vertData);
+    }
+    std::cout << vectorVDO.getVector()[0] << std::endl;
+    std::cout << "END" << std::endl;
     
     engine.createRenderObject(verts1, indices1);
     engine.createRenderObject(verts2, indices2);

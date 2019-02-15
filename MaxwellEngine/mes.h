@@ -18,4 +18,7 @@ namespace mes {
     class ShaderFile;
 }
 
+#include "Vec.hpp"
+#include "VertexDataObject.hpp"
+
 #endif /* mes_h */

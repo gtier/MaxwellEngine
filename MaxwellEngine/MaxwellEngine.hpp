@@ -21,6 +21,8 @@ class mes::MaxwellEngine
 {
 public:
     typedef std::vector<std::unique_ptr<mes::RenderObject>> VecRenderObject;
+    typedef void (*renderIntercept_t)();
+    typedef void (*handleInput_t)(GLFWwindow* window);
     
 private:
     GLFWwindow* engineWindow;
@@ -47,10 +49,20 @@ public:
     
     void startRenderLoop();
     
+    void startRenderLoop(handleInput_t);
+    
+    void startRenderLoop(renderIntercept_t);
+    
+    void startRenderLoop(handleInput_t, renderIntercept_t);
+    
     void stopRenderLoop();
     
 private:
     void init(int width, int height, const char* vertShader, const char* fragmentShader);
+    
+    void renderLoop(void (*handleInput)(GLFWwindow* window), void (*renderIntercept)());
+    
+    void renderFrame();
 };
 
 

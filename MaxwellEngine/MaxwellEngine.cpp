@@ -102,25 +102,58 @@ void mes::MaxwellEngine::createRenderObject(std::vector<float>& verts, std::vect
 
 void mes::MaxwellEngine::startRenderLoop()
 {
+    renderLoop(nullptr, nullptr);
+}
+
+void mes::MaxwellEngine::startRenderLoop(handleInput_t handleInput)
+{
+    renderLoop(handleInput, nullptr);
+}
+
+void mes::MaxwellEngine::startRenderLoop(renderIntercept_t renderIntercept)
+{
+    renderLoop(nullptr, renderIntercept);
+}
+
+void mes::MaxwellEngine::startRenderLoop(handleInput_t handleInput, renderIntercept_t renderIntercept)
+{
+    renderLoop(handleInput, renderIntercept);
+}
+
+void mes::MaxwellEngine::renderLoop(void (*handleInput)(GLFWwindow* window), void (*renderIntercept)())
+{
     while(!glfwWindowShouldClose(engineWindow))
     {
         //User Input
-        
+        if (handleInput)
+        {
+            handleInput(engineWindow);
+        }
         //Rendering
         
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f); //Sets the color of the clear (fills the entire buffer with this color)
-        glClear(GL_COLOR_BUFFER_BIT); //Uses the OpenGL state clear color to clear the screen
-        
-        for (int i = 0; i < vecRenderObject.size(); ++i)
+        //Calling the render intercept
+        if (renderIntercept)
         {
-            vecRenderObject[i]->render();
+            renderIntercept();
         }
         
-        //Swap back buffer with front buffer (displayed image)
-        glfwSwapBuffers(engineWindow);
-        //Check events (Keyboard pressed or mouse movement)
-        glfwPollEvents();
+        renderFrame();
     }
+}
+
+void mes::MaxwellEngine::renderFrame()
+{
+    glClear(GL_COLOR_BUFFER_BIT); //Uses the OpenGL state clear color to clear the screen
+    
+    for (int i = 0; i < vecRenderObject.size(); ++i)
+    {
+        vecRenderObject[i]->render();
+    }
+    
+    //Swap back buffer with front buffer (displayed image)
+    glfwSwapBuffers(engineWindow);
+    //Check events (Keyboard pressed or mouse movement)
+    glfwPollEvents();
 }
 
 void mes::MaxwellEngine::stopRenderLoop()
