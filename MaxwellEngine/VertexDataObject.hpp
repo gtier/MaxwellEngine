@@ -20,9 +20,9 @@ namespace mes {
     class VertexDataObject
     {
     public:
-        typedef Vec3<T> coord_t;
-        typedef Vec3<T> color_t;
-        typedef Vec2<T> uv_t;
+        typedef Vec<T, 3> coord_t;
+        typedef Vec<T, 3> color_t;
+        typedef Vec<T, 2> uv_t;
     private:
         coord_t coord;
         color_t color;
@@ -47,17 +47,17 @@ namespace mes {
         
         size_t coordSize()
         {
-            return sizeof(coord);
+            return coord.getSize();
         }
         
         size_t colorSize()
         {
-            return sizeof(color);
+            return color.getSize();
         }
         
         size_t uvSize()
         {
-            return sizeof(uv);
+            return uv.getSize();
         }
         
         

@@ -48,12 +48,13 @@ int main(int argc, const char * argv[]) {
         using namespace mes;
         Vec3f a, b;
         Vec2f c;
-        a.x = 1;
-        b.y = 2;
-        c.y = 3;
+        a.data[0] = 1;
+        b.data[1] = 2;
+        c.data[1] = 3;
         VDO<float> vertData(a, b, c);
         std::cout << vertData << std::endl;
         std::cout << vertData.coordSize() << std::endl;
+        std::cout << a + b << "," << a-b << std::endl;
         vectorVDO.getVector().push_back(vertData);
     }
     std::cout << vectorVDO.getVector()[0] << std::endl;
