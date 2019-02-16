@@ -45,7 +45,8 @@ public:
         glViewport(0, 0, width, height);
     }
     
-    void createRenderObject(std::vector<float>& verts, std::vector<unsigned int>& indices);
+    template <class T>
+    void createRenderObject(mes::VertexDataObject<T>& verts, std::vector<unsigned int>& indices);
     
     void startRenderLoop();
     

@@ -14,76 +14,108 @@
 #include <iostream>
 #include <vector>
 #include <type_traits>
+#include <memory>
 
 namespace mes {
+    
     template <class T>
     class VertexDataObject
     {
     public:
-        typedef Vec<T, 3> coord_t;
-        typedef Vec<T, 3> color_t;
-        typedef Vec<T, 2> uv_t;
+        typedef std::unique_ptr<std::vector<T>> VertexDataPtr_t;
+        
+        enum VertexDataType {
+            VEC2 = 2,
+            VEC3 = 3,
+            VEC4 = 4
+        };
+        
     private:
-        coord_t coord;
-        color_t color;
-        uv_t uv;
+        VertexDataPtr_t vertexDataPtr;
+        std::vector<VertexDataType> vertexTypes;
+        
     public:
-        VertexDataObject()
+        VertexDataObject(VertexDataPtr_t& vertexDataPtr)
+        : vertexDataPtr(std::move(vertexDataPtr))
         {
         }
         
-        
-        VertexDataObject(const coord_t& coord, const color_t& color, const uv_t& uv)
-        : coord(coord), color(color), uv(uv)
+        void addVertexData(const T& dataToAdd)
         {
+            vertexDataPtr->push_back(dataToAdd);
         }
         
-        
-        friend std::ostream& operator<<(std::ostream& os, const VertexDataObject<T>& vdo)
+        void addVertexType(const VertexDataType& attribType)
         {
-            os << "{" << vdo.coord << "," << vdo.color << "," << vdo.uv << "}";
-            return os;
+            vertexTypes.push_back(attribType);
         }
         
-        size_t coordSize()
+        std::vector<T>& getVertexData()
         {
-            return coord.getSize();
+            return *vertexDataPtr;
         }
         
-        size_t colorSize()
+        T* getVertexArray()
         {
-            return color.getSize();
+            return &((*vertexDataPtr).at(0));
         }
         
-        size_t uvSize()
+        std::vector<VertexDataType>& getVertexTypes()
         {
-            return uv.getSize();
+            return vertexTypes;
         }
         
+        int getStride()
+        {
+            int counter(0);
+            for (int i = 0; i < vertexTypes.size(); ++i)
+            {
+                counter += vertexTypes.at(i) * sizeof(T);
+            }
+            return counter;
+        }
         
+        long getSize()
+        {
+            return vertexDataPtr->size() * sizeof(T);
+        }
+        void createVertexAttributeList(std::vector<VertexAttribute>& output)
+        {
+            output.clear();
+            long offset(0);
+            for (int i = 0; i < vertexTypes.size(); ++i)
+            {
+                if (i == 0) {
+                    VertexAttribute tempVertexAttribute(i, vertexTypes.at(i), getGLenum(), GL_FALSE, getStride(), (void*)0);
+                        output.push_back(tempVertexAttribute);
+                } else {
+                    offset += vertexTypes.at(i-1) * sizeof(T);
+                    VertexAttribute tempVertexAttribute(i, vertexTypes.at(i), getGLenum(), GL_FALSE, getStride(), (void*)offset);
+                    std::cout << "Test: " << offset << std::endl;
+                    output.push_back(tempVertexAttribute);
+                }
+            }
+        }
+    private:
+        int getGLenum() {
+            if (std::is_same<T, float>::value) {
+                return GL_FLOAT;
+            } else if (std::is_same<T, int>::value) {
+                return GL_INT;
+            } else if (std::is_same<T, double>::value) {
+                return GL_DOUBLE;
+            } else {
+                throw "Invalid VertexDataObject type. Must be float, int, or double";
+            }
+        }
     };
     
     template<class T>
     using VDO = VertexDataObject<T>;
     
-    template<class T>
-    using VectorVDO_t = std::vector<VertexDataObject<T> >;
-    
-    template<class T>
-    class VectorVDO
-    {
-    private:
-        VectorVDO_t<T> vectorVDO;
-       
-    public:
-        VectorVDO()
-        {
-        }
-        
-        VectorVDO_t<T>& getVector() {
-            return vectorVDO;
-        }
-    };
+    typedef VertexDataObject<float> VDOFloat;
+    typedef VertexDataObject<int> VDOInt;
+    typedef VertexDataObject<double> VDODouble;
 }
 
 #endif /* VertexDataObject_hpp */

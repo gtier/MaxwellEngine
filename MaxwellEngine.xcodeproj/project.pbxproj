@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8540A55422164E7600C5B643 /* VertexDataObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8540A55222164E7600C5B643 /* VertexDataObject.cpp */; };
-		8540A55722164EC800C5B643 /* Vec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8540A55522164EC800C5B643 /* Vec.cpp */; };
 		854BD9C9220A4F5300975E99 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 854BD9C8220A4F5300975E99 /* main.cpp */; };
 		854BD9D1220A4F7E00975E99 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 854BD9D0220A4F7E00975E99 /* CoreVideo.framework */; };
 		854BD9D3220A4F8500975E99 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 854BD9D2220A4F8400975E99 /* IOKit.framework */; };
@@ -34,9 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8540A55222164E7600C5B643 /* VertexDataObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VertexDataObject.cpp; sourceTree = "<group>"; };
 		8540A55322164E7600C5B643 /* VertexDataObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexDataObject.hpp; sourceTree = "<group>"; };
-		8540A55522164EC800C5B643 /* Vec.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Vec.cpp; sourceTree = "<group>"; };
 		8540A55622164EC800C5B643 /* Vec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vec.hpp; sourceTree = "<group>"; };
 		854BD9C5220A4F5300975E99 /* MaxwellEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MaxwellEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 		854BD9C8220A4F5300975E99 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -53,6 +49,8 @@
 		854BD9E2220A679800975E99 /* mes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mes.h; sourceTree = "<group>"; };
 		8550A44E220D14A900DF4FB4 /* ShaderFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderFile.cpp; sourceTree = "<group>"; };
 		8550A44F220D14A900DF4FB4 /* ShaderFile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderFile.hpp; sourceTree = "<group>"; };
+		85B397312217A4A500DBB63F /* VertexAttribute.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexAttribute.hpp; sourceTree = "<group>"; };
+		85B397332217BA7D00DBB63F /* MaxwellUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaxwellUtils.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +97,10 @@
 				854BD9DF220A562700975E99 /* RenderObject.cpp */,
 				854BD9E0220A562700975E99 /* RenderObject.hpp */,
 				854BD9E2220A679800975E99 /* mes.h */,
-				8540A55522164EC800C5B643 /* Vec.cpp */,
+				85B397332217BA7D00DBB63F /* MaxwellUtils.h */,
 				8540A55622164EC800C5B643 /* Vec.hpp */,
-				8540A55222164E7600C5B643 /* VertexDataObject.cpp */,
 				8540A55322164E7600C5B643 /* VertexDataObject.hpp */,
+				85B397312217A4A500DBB63F /* VertexAttribute.hpp */,
 				8550A44E220D14A900DF4FB4 /* ShaderFile.cpp */,
 				8550A44F220D14A900DF4FB4 /* ShaderFile.hpp */,
 			);
@@ -186,9 +184,7 @@
 			files = (
 				854BD9E1220A562700975E99 /* RenderObject.cpp in Sources */,
 				854BD9C9220A4F5300975E99 /* main.cpp in Sources */,
-				8540A55422164E7600C5B643 /* VertexDataObject.cpp in Sources */,
 				8550A450220D14A900DF4FB4 /* ShaderFile.cpp in Sources */,
-				8540A55722164EC800C5B643 /* Vec.cpp in Sources */,
 				854BD9DE220A516900975E99 /* MaxwellEngine.cpp in Sources */,
 				854BD9DB220A508300975E99 /* glad.c in Sources */,
 			);

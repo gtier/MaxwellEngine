@@ -19,19 +19,17 @@ namespace mes {
     class Vec
     {
     public:
-        std::unique_ptr<T[]> data;
+        T data[dimmension] = {};
         const int dim;
         
         Vec()
         : dim(dimmension)
         {
-            data = std::make_unique<T[]>(dimmension);
         }
         
         Vec(T* vals)
         : dim(dimmension)
         {
-            data = std::make_unique<T[]>(dimmension);
             for(int i = 0; i < dimmension; ++i)
             {
                 data[i] = vals[i];
@@ -41,7 +39,6 @@ namespace mes {
         Vec(const Vec<T, dimmension>& vecToCopy)
         : dim(vecToCopy.dim)
         {
-            data = std::make_unique<T[]>(vecToCopy.dim);
             for (int i = 0; i < dim; ++i)
             {
                 data[i] = vecToCopy.data[i];

@@ -26,7 +26,8 @@ public:
         glGenBuffers(1, &EBO);
     }
     
-    void init(float verts[], size_t vertsSize, unsigned int indices[], size_t indicesSize);
+    template<class T>
+    void init(mes::VertexDataObject<T>& vdo, unsigned int indices[], size_t indicesSize);
     
     void render();
 };

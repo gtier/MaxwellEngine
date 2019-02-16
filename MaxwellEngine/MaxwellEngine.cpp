@@ -86,19 +86,26 @@ void mes::MaxwellEngine::init(int width, int height,  const char* vertShader, co
     glDeleteShader(engineFragmentShader);
 }
 
-void mes::MaxwellEngine::createRenderObject(std::vector<float>& verts, std::vector<unsigned int>& indices)
+template <class T>
+void mes::MaxwellEngine::createRenderObject(mes::VertexDataObject<T>& vdo, std::vector<unsigned int>& indices)
 {
-    size_t vertsSize = verts.size();
     size_t indicesSize = indices.size();
     
-    float* vertsArr = &verts[0];
     unsigned int* indicesArr = &indices[0];
     
     std::unique_ptr<mes::RenderObject> renderObjectPointer = std::make_unique<mes::RenderObject>();
-    renderObjectPointer->init(vertsArr, vertsSize * sizeof(float), indicesArr, indicesSize * sizeof(int));
+    renderObjectPointer->init(vdo, indicesArr, indicesSize * sizeof(int));
     
     vecRenderObject.push_back(std::move(renderObjectPointer));
 };
+
+//createRenderObject templates
+template void mes::MaxwellEngine::createRenderObject<float>(mes::VertexDataObject<float>&, std::vector<unsigned int>&);
+
+template void mes::MaxwellEngine::createRenderObject<int>(mes::VertexDataObject<int>&, std::vector<unsigned int>&);
+
+template void mes::MaxwellEngine::createRenderObject<double>(mes::VertexDataObject<double>&, std::vector<unsigned int>&);
+
 
 void mes::MaxwellEngine::startRenderLoop()
 {
@@ -143,6 +150,7 @@ void mes::MaxwellEngine::renderLoop(void (*handleInput)(GLFWwindow* window), voi
 
 void mes::MaxwellEngine::renderFrame()
 {
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT); //Uses the OpenGL state clear color to clear the screen
     
     for (int i = 0; i < vecRenderObject.size(); ++i)

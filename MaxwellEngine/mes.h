@@ -18,7 +18,9 @@ namespace mes {
     class ShaderFile;
 }
 
+#include "MaxwellUtils.h"
 #include "Vec.hpp"
+#include "VertexAttribute.hpp"
 #include "VertexDataObject.hpp"
 
 #endif /* mes_h */
