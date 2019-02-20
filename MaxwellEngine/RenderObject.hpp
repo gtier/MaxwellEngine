@@ -18,6 +18,8 @@ class mes::RenderObject
 {
 private:
     unsigned int VAO, VBO, EBO, EBO_size;
+    std::unique_ptr<mes::TextureObject> texture_uptr;
+    
 public:
     RenderObject()
     {
@@ -28,6 +30,7 @@ public:
     
     template<class T>
     void init(mes::VertexDataObject<T>& vdo, unsigned int indices[], size_t indicesSize);
+    void addTexture(const mes::TextureObject& textureObject);
     
     void render();
 };

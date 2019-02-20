@@ -12,6 +12,9 @@
 #include "MaxwellEngine.hpp"
 #include "RenderObject.hpp"
 #include "ShaderFile.hpp"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 int main(int argc, const char * argv[]) {
     mes::ShaderFile vertexShaderFile("/Users/griffin/Documents/cpp-projects/MaxwellEngine/MaxwellEngine/Shaders/vertexShader.glsl");
@@ -21,13 +24,16 @@ int main(int argc, const char * argv[]) {
     mes::MaxwellEngine engine(vertexShaderFile.read(), fragmentShaderFile.read());
     
     std::vector<float> verts1 = {
-        -0.1, 0, 0,
-        -0.5, 0.5, 0,
-        -0.1, 0.5, 0
+        // positions          // colors           // texture coords
+        1.0f,  1.0f, 0.0f, 1.0f, 1.0f, // top right
+        1.0f, -1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+        -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom left
+        -1.0f,  1.0f, 0.0f, 0.0f, 1.0f  // top left
     };
     
-    std::vector<unsigned int> indices1 = {
-        0,1,2
+    std::vector<unsigned int> indices1  = {
+        0, 1, 3, // first triangle
+        1, 2, 3  // second triangle
     };
     
     std::vector<float> verts2 = {
@@ -42,14 +48,21 @@ int main(int argc, const char * argv[]) {
     
     mes::VectorFloat_uptr verts1ptr(&verts1);
     mes::VDOFloat vdo1(verts1ptr);
-    vdo1.addVertexType(mes::VDOFloat::VertexDataType::VEC3);
+    vdo1.addVertexType(mes::VDOFloat::VEC3);
+    vdo1.addVertexType(mes::VDOFloat::VEC2);
     
     mes::VectorFloat_uptr verts2ptr(&verts2);
     mes::VDOFloat vdo2(verts2ptr);
     vdo2.addVertexType(mes::VDOFloat::VertexDataType::VEC3);
     
-    engine.createRenderObject(vdo1, indices1);
-    engine.createRenderObject(vdo2, indices2);
+    mes::MaxwellEngine::obj_id id;
+    id = engine.createRenderObject(vdo1, indices1);
+   // engine.createRenderObject(vdo2, indices2);
+    
+    mes::TextureObject texture("/Users/griffin/Desktop/profile.jpg");
+    engine.getRenderObject(id).addTexture(texture);
+    
     engine.startRenderLoop();
+    
     return 0;
 }

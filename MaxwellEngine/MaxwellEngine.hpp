@@ -23,6 +23,7 @@ public:
     typedef std::vector<std::unique_ptr<mes::RenderObject>> VecRenderObject;
     typedef void (*renderIntercept_t)();
     typedef void (*handleInput_t)(GLFWwindow* window);
+    typedef unsigned long obj_id;
     
 private:
     GLFWwindow* engineWindow;
@@ -46,7 +47,12 @@ public:
     }
     
     template <class T>
-    void createRenderObject(mes::VertexDataObject<T>& verts, std::vector<unsigned int>& indices);
+    obj_id createRenderObject(mes::VertexDataObject<T>& verts, std::vector<unsigned int>& indices);
+    
+    mes::RenderObject& getRenderObject(obj_id id)
+    {
+        return *vecRenderObject[id];
+    }
     
     void startRenderLoop();
     

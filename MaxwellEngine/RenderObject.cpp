@@ -39,8 +39,17 @@ template void mes::RenderObject::init<int>(mes::VertexDataObject<int>&, unsigned
 
 template void mes::RenderObject::init<double>(mes::VertexDataObject<double>&, unsigned int indices[], size_t);
 
+void mes::RenderObject::addTexture(const mes::TextureObject& textureObject)
+{
+    texture_uptr = std::make_unique<mes::TextureObject>(textureObject);
+}
+
 void mes::RenderObject::render()
 {
+    if (texture_uptr) {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture_uptr->getTexture());
+    }
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, EBO_size, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);

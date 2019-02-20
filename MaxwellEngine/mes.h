@@ -11,6 +11,9 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace mes {
     class MaxwellEngine;
@@ -22,5 +25,6 @@ namespace mes {
 #include "Vec.hpp"
 #include "VertexAttribute.hpp"
 #include "VertexDataObject.hpp"
+#include "TextureObject.hpp"
 
 #endif /* mes_h */

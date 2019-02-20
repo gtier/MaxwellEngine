@@ -82,12 +82,16 @@ void mes::MaxwellEngine::init(int width, int height,  const char* vertShader, co
     //Sets the OpenGL shader program to the inputted object. Pass in 0 to set the OpenGL shader program to the default program.
     glUseProgram(engineShaderProgram);
     
+    //IMPORTANT
+    //Texture unit configuration: sets fragment shader uniform "customTexture" sampler to 0.
+    glUniform1i(glGetUniformLocation(engineShaderProgram, "customTexture"), 0);
+    
     glDeleteShader(engineVertexShader);
     glDeleteShader(engineFragmentShader);
 }
 
 template <class T>
-void mes::MaxwellEngine::createRenderObject(mes::VertexDataObject<T>& vdo, std::vector<unsigned int>& indices)
+mes::MaxwellEngine::obj_id mes::MaxwellEngine::createRenderObject(mes::VertexDataObject<T>& vdo, std::vector<unsigned int>& indices)
 {
     size_t indicesSize = indices.size();
     
@@ -97,14 +101,16 @@ void mes::MaxwellEngine::createRenderObject(mes::VertexDataObject<T>& vdo, std::
     renderObjectPointer->init(vdo, indicesArr, indicesSize * sizeof(int));
     
     vecRenderObject.push_back(std::move(renderObjectPointer));
+    
+    return vecRenderObject.size() - 1;
 };
 
 //createRenderObject templates
-template void mes::MaxwellEngine::createRenderObject<float>(mes::VertexDataObject<float>&, std::vector<unsigned int>&);
+template mes::MaxwellEngine::obj_id mes::MaxwellEngine::createRenderObject<float>(mes::VertexDataObject<float>&, std::vector<unsigned int>&);
 
-template void mes::MaxwellEngine::createRenderObject<int>(mes::VertexDataObject<int>&, std::vector<unsigned int>&);
+template mes::MaxwellEngine::obj_id mes::MaxwellEngine::createRenderObject<int>(mes::VertexDataObject<int>&, std::vector<unsigned int>&);
 
-template void mes::MaxwellEngine::createRenderObject<double>(mes::VertexDataObject<double>&, std::vector<unsigned int>&);
+template mes::MaxwellEngine::obj_id mes::MaxwellEngine::createRenderObject<double>(mes::VertexDataObject<double>&, std::vector<unsigned int>&);
 
 
 void mes::MaxwellEngine::startRenderLoop()

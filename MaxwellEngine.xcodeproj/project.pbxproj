@@ -17,6 +17,7 @@
 		854BD9DE220A516900975E99 /* MaxwellEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 854BD9DC220A516900975E99 /* MaxwellEngine.cpp */; };
 		854BD9E1220A562700975E99 /* RenderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 854BD9DF220A562700975E99 /* RenderObject.cpp */; };
 		8550A450220D14A900DF4FB4 /* ShaderFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8550A44E220D14A900DF4FB4 /* ShaderFile.cpp */; };
+		85E5B042221CC4EB00AD4CAF /* TextureObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85E5B040221CC4EB00AD4CAF /* TextureObject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,8 @@
 		8550A44F220D14A900DF4FB4 /* ShaderFile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderFile.hpp; sourceTree = "<group>"; };
 		85B397312217A4A500DBB63F /* VertexAttribute.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexAttribute.hpp; sourceTree = "<group>"; };
 		85B397332217BA7D00DBB63F /* MaxwellUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaxwellUtils.h; sourceTree = "<group>"; };
+		85E5B040221CC4EB00AD4CAF /* TextureObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureObject.cpp; sourceTree = "<group>"; };
+		85E5B041221CC4EB00AD4CAF /* TextureObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextureObject.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 				85B397312217A4A500DBB63F /* VertexAttribute.hpp */,
 				8550A44E220D14A900DF4FB4 /* ShaderFile.cpp */,
 				8550A44F220D14A900DF4FB4 /* ShaderFile.hpp */,
+				85E5B040221CC4EB00AD4CAF /* TextureObject.cpp */,
+				85E5B041221CC4EB00AD4CAF /* TextureObject.hpp */,
 			);
 			path = MaxwellEngine;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85E5B042221CC4EB00AD4CAF /* TextureObject.cpp in Sources */,
 				854BD9E1220A562700975E99 /* RenderObject.cpp in Sources */,
 				854BD9C9220A4F5300975E99 /* main.cpp in Sources */,
 				8550A450220D14A900DF4FB4 /* ShaderFile.cpp in Sources */,

@@ -2,9 +2,11 @@
 #version 330 core
 out vec4 FragColor;
 
-uniform vec4 customColor;
+in vec2 uv;
+
+uniform sampler2D customTexture;
 
 void main()
 {
-    FragColor = customColor;
+    FragColor = texture(customTexture, uv);
 } 
