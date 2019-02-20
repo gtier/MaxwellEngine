@@ -19,6 +19,7 @@ namespace mes {
     class MaxwellEngine;
     class RenderObject;
     class ShaderFile;
+    class CameraObject;
 }
 
 #include "MaxwellUtils.h"

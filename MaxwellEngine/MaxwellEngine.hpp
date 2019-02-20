@@ -16,12 +16,13 @@
 #include <iostream>
 #include "mes.h"
 #include "RenderObject.hpp"
+#include "CameraObject.hpp"
 
 class mes::MaxwellEngine
 {
 public:
     typedef std::vector<std::unique_ptr<mes::RenderObject>> VecRenderObject;
-    typedef void (*renderIntercept_t)();
+    typedef void (*renderIntercept_t)(MaxwellEngine& engine);
     typedef void (*handleInput_t)(GLFWwindow* window);
     typedef unsigned long obj_id;
     
@@ -29,14 +30,17 @@ private:
     GLFWwindow* engineWindow;
     unsigned int engineVertexShader, engineFragmentShader, engineShaderProgram;
     VecRenderObject vecRenderObject;
+    CameraObject mainCamera;
     
 public:
     MaxwellEngine(const char* vertShader, const char* fragmentShader)
+    : mainCamera(800, 600)
     {
         init(800, 600, vertShader, fragmentShader);
     }
     
     MaxwellEngine(int width, int height, const char* vertShader, const char* fragmentShader)
+    : mainCamera(width, height)
     {
         init(width, height, vertShader, fragmentShader);
     }
@@ -54,6 +58,11 @@ public:
         return *vecRenderObject[id];
     }
     
+    mes::CameraObject& getMainCamera()
+    {
+        return mainCamera;
+    }
+    
     void startRenderLoop();
     
     void startRenderLoop(handleInput_t);
@@ -67,7 +76,7 @@ public:
 private:
     void init(int width, int height, const char* vertShader, const char* fragmentShader);
     
-    void renderLoop(void (*handleInput)(GLFWwindow* window), void (*renderIntercept)());
+    void renderLoop(handleInput_t handleInput, renderIntercept_t renderIntercept);
     
     void renderFrame();
 };

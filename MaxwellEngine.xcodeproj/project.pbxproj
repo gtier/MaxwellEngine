@@ -18,6 +18,7 @@
 		854BD9E1220A562700975E99 /* RenderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 854BD9DF220A562700975E99 /* RenderObject.cpp */; };
 		8550A450220D14A900DF4FB4 /* ShaderFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8550A44E220D14A900DF4FB4 /* ShaderFile.cpp */; };
 		85E5B042221CC4EB00AD4CAF /* TextureObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85E5B040221CC4EB00AD4CAF /* TextureObject.cpp */; };
+		85E5B045221CEE3000AD4CAF /* CameraObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85E5B043221CEE3000AD4CAF /* CameraObject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +55,8 @@
 		85B397332217BA7D00DBB63F /* MaxwellUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaxwellUtils.h; sourceTree = "<group>"; };
 		85E5B040221CC4EB00AD4CAF /* TextureObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureObject.cpp; sourceTree = "<group>"; };
 		85E5B041221CC4EB00AD4CAF /* TextureObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextureObject.hpp; sourceTree = "<group>"; };
+		85E5B043221CEE3000AD4CAF /* CameraObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CameraObject.cpp; sourceTree = "<group>"; };
+		85E5B044221CEE3000AD4CAF /* CameraObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CameraObject.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,8 @@
 				854BD9DD220A516900975E99 /* MaxwellEngine.hpp */,
 				854BD9DF220A562700975E99 /* RenderObject.cpp */,
 				854BD9E0220A562700975E99 /* RenderObject.hpp */,
+				85E5B043221CEE3000AD4CAF /* CameraObject.cpp */,
+				85E5B044221CEE3000AD4CAF /* CameraObject.hpp */,
 				854BD9E2220A679800975E99 /* mes.h */,
 				85B397332217BA7D00DBB63F /* MaxwellUtils.h */,
 				8540A55622164EC800C5B643 /* Vec.hpp */,
@@ -191,6 +196,7 @@
 				854BD9E1220A562700975E99 /* RenderObject.cpp in Sources */,
 				854BD9C9220A4F5300975E99 /* main.cpp in Sources */,
 				8550A450220D14A900DF4FB4 /* ShaderFile.cpp in Sources */,
+				85E5B045221CEE3000AD4CAF /* CameraObject.cpp in Sources */,
 				854BD9DE220A516900975E99 /* MaxwellEngine.cpp in Sources */,
 				854BD9DB220A508300975E99 /* glad.c in Sources */,
 			);

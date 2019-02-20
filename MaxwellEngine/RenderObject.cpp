@@ -7,6 +7,7 @@
 //
 
 #include "RenderObject.hpp"
+#include "CameraObject.hpp"
 
 template <class T>
 void mes::RenderObject::init(mes::VertexDataObject<T>& vdo, unsigned int indices[], size_t indicesSize)
@@ -44,8 +45,26 @@ void mes::RenderObject::addTexture(const mes::TextureObject& textureObject)
     texture_uptr = std::make_unique<mes::TextureObject>(textureObject);
 }
 
-void mes::RenderObject::render()
+glm::mat4& mes::RenderObject::getModelMatrix()
 {
+    return modelMatrix;
+}
+
+void mes::RenderObject::setModelMatrix(const glm::mat4 &model)
+{
+    modelMatrix = model;
+}
+
+void mes::RenderObject::render(const unsigned int shaderProgram_id, const mes::CameraObject& camera)
+{
+    //TODO optimize when to multiply by modelMatrix. Only multiply when changed.
+    
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram_id, "model"), 1, GL_FALSE, glm::value_ptr(modelMatrix));
+    
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram_id, "view"), 1, GL_FALSE, glm::value_ptr(camera.getViewMatrix()));
+    
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram_id, "projection"), 1, GL_FALSE, glm::value_ptr(camera.getProjectionMatrix()));
+    
     if (texture_uptr) {
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture_uptr->getTexture());

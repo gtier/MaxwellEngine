@@ -133,7 +133,7 @@ void mes::MaxwellEngine::startRenderLoop(handleInput_t handleInput, renderInterc
     renderLoop(handleInput, renderIntercept);
 }
 
-void mes::MaxwellEngine::renderLoop(void (*handleInput)(GLFWwindow* window), void (*renderIntercept)())
+void mes::MaxwellEngine::renderLoop(handleInput_t handleInput, renderIntercept_t renderIntercept)
 {
     while(!glfwWindowShouldClose(engineWindow))
     {
@@ -147,7 +147,7 @@ void mes::MaxwellEngine::renderLoop(void (*handleInput)(GLFWwindow* window), voi
         //Calling the render intercept
         if (renderIntercept)
         {
-            renderIntercept();
+            renderIntercept(*this);
         }
         
         renderFrame();
@@ -161,7 +161,7 @@ void mes::MaxwellEngine::renderFrame()
     
     for (int i = 0; i < vecRenderObject.size(); ++i)
     {
-        vecRenderObject[i]->render();
+        vecRenderObject[i]->render(engineShaderProgram, mainCamera);
     }
     
     //Swap back buffer with front buffer (displayed image)
