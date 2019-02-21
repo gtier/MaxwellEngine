@@ -55,7 +55,7 @@ public:
     
     mes::RenderObject& getRenderObject(obj_id id)
     {
-        return *vecRenderObject[id];
+        return *vecRenderObject.at(id);
     }
     
     mes::CameraObject& getMainCamera()
