@@ -82,6 +82,9 @@ void mes::MaxwellEngine::init(int width, int height,  const char* vertShader, co
     //Sets the OpenGL shader program to the inputted object. Pass in 0 to set the OpenGL shader program to the default program.
     glUseProgram(engineShaderProgram);
     
+    //Enable depth buffer
+    glEnable(GL_DEPTH_TEST);
+    
     //IMPORTANT
     //Texture unit configuration: sets fragment shader uniform "customTexture" sampler to 0.
     glUniform1i(glGetUniformLocation(engineShaderProgram, "customTexture"), 0);
@@ -157,7 +160,9 @@ void mes::MaxwellEngine::renderLoop(handleInput_t handleInput, renderIntercept_t
 void mes::MaxwellEngine::renderFrame()
 {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT); //Uses the OpenGL state clear color to clear the screen
+    
+    //Binary OR operator used below
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Uses the OpenGL state clear color to clear the screen and clears the depth buffer
     
     for (int i = 0; i < vecRenderObject.size(); ++i)
     {

@@ -19,7 +19,7 @@
 void renderIntercept(mes::MaxwellEngine& engine)
 {
     engine.getRenderObject(0).setModelMatrix(glm::mat4(1.0f));
-    engine.getRenderObject(0).setModelMatrix(glm::rotate(engine.getRenderObject(0).getModelMatrix(), (float)glfwGetTime(), glm::vec3(-1.0f, 0.0f, 1.0f)));
+    engine.getRenderObject(0).setModelMatrix(glm::rotate(engine.getRenderObject(0).getModelMatrix(), (float)glfwGetTime(), glm::vec3(-1.0f, 0.0f, 0.2f)));
 }
 
 int main(int argc, const char * argv[]) {
@@ -36,10 +36,15 @@ int main(int argc, const char * argv[]) {
         -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom left
         -1.0f,  1.0f, 0.0f, 0.0f, 1.0f,  // top left
         
-        1.0f,  1.0f, -1.0f, 1.0f, 1.0f, // top right
-        1.0f, -1.0f, -1.0f, 1.0f, 0.0f, // bottom right
-        -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, // bottom left
-        -1.0f,  1.0f, -1.0f, 0.0f, 1.0f,  // top left
+        1.0f,  1.0f, -2.0f, 1.0f, 1.0f, // top right
+        1.0f, -1.0f, -2.0f, 1.0f, 0.0f, // bottom right
+        -1.0f, -1.0f, -2.0f, 0.0f, 0.0f, // bottom left
+        -1.0f,  1.0f, -2.0f, 0.0f, 1.0f,  // top left
+        
+        1.0f,  1.0f, -2.0f, 1.0f, 1.0f, // top right
+        1.0f, -1.0f, -2.0f, 1.0f, 0.0f, // bottom right
+        1.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom left
+        1.0f,  1.0f, 0.0f, 0.0f, 1.0f,  // top left
     };
     
     std::vector<unsigned int> indices1  = {
@@ -48,6 +53,18 @@ int main(int argc, const char * argv[]) {
         
         4, 5, 7, // first triangle
         5, 6, 7,  // second triangle
+        
+        8, 9, 11, // first triangle
+        9, 10, 11,  // second triangle
+        
+        12, 13, 15, // first triangle
+        13, 14, 15,  // second triangle
+        
+        16, 17, 19, // first triangle
+        17, 18, 19,  // second triangle
+        
+        20, 21, 23, // first triangle
+        21, 22, 23,  // second triangle
     };
     
     std::vector<float> verts2 = {
