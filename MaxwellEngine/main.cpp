@@ -9,6 +9,7 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "VoxwellEngine.hpp"
 #include "MaxwellEngine.hpp"
 #include "RenderObject.hpp"
 #include "ShaderFile.hpp"
@@ -18,8 +19,8 @@
 
 void renderIntercept(mes::MaxwellEngine& engine)
 {
-    engine.getRenderObject(0).setModelMatrix(glm::mat4(1.0f));
-    engine.getRenderObject(0).setModelMatrix(glm::rotate(engine.getRenderObject(0).getModelMatrix(), (float)glfwGetTime(), glm::vec3(0.5f, -1.0f, 0.0f)));
+    //engine.getRenderObject(0).setModelMatrix(glm::mat4(1.0f));
+    //engine.getRenderObject(0).setModelMatrix(glm::rotate(engine.getRenderObject(0).getModelMatrix(), (float)glfwGetTime(), glm::vec3(0.5f, -1.0f, 0.0f)));
 }
 
 int main(int argc, const char * argv[]) {
@@ -27,7 +28,13 @@ int main(int argc, const char * argv[]) {
     
     mes::ShaderFile fragmentShaderFile("/Users/griffin/Documents/cpp-projects/MaxwellEngine/MaxwellEngine/Shaders/fragmentShader.glsl");
     
-    mes::MaxwellEngine engine(vertexShaderFile.read(), fragmentShaderFile.read());
+    /**
+    ves::VoxwellEngine voxEngine(800, 600, vertexShaderFile, fragmentShaderFile);
+    
+    voxEngine.start();
+    */
+    
+    mes::MaxwellEngine engine(vertexShaderFile, fragmentShaderFile);
     
     std::vector<float> verts1 = {
         // positions          // colors           // texture coords
@@ -80,14 +87,31 @@ int main(int argc, const char * argv[]) {
     
     mes::MaxwellEngine::obj_id id;
     id = engine.createRenderObject(vdo1, indices1);
-   // engine.createRenderObject(vdo2, indices2);
+   //
     
-    mes::TextureObject texture("/Users/griffin/Desktop/profile.jpg");
-    engine.getRenderObject(id).addTexture(texture);
+    //mes::TextureObject texture1("PATH TO JPG");
+    //engine.getRenderObject(id).addTexture(texture1);
     
     engine.getMainCamera().setViewMatrix(glm::translate(engine.getMainCamera().getViewMatrix(), glm::vec3(0.0f, 0.0f, -5.0f)));
     
-    engine.startRenderLoop(renderIntercept);
+    engine.getMainCamera().setSpeed(10.0f);
     
+    engine.getMainCamera().setSensitivity(0.25f);
+    
+    engine.enableCursorHanler();
+    
+    engine.mountStaticCamera();
+    
+    engine.deleteRenderObject(id);
+    
+    std::cout << "Old: " << id << std::endl;
+    
+    id = engine.createRenderObject(vdo1, indices1);
+    
+    //engine.getRenderObject(id).addTexture(texture1);
+    
+    std::cout << "New: " << id << std::endl;
+    
+    engine.startRenderLoop();
     return 0;
 }

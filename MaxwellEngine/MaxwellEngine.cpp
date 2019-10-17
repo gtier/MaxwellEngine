@@ -8,7 +8,9 @@
 
 #include "MaxwellEngine.hpp"
 
-void mes::MaxwellEngine::init(int width, int height,  const char* vertShader, const char* fragmentShader)
+static mes::CameraObject* staticCameraPtr = nullptr;
+
+void mes::MaxwellEngine::init(int width, int height,  mes::ShaderFile& vertShader, mes::ShaderFile& fragmentShader)
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -35,59 +37,30 @@ void mes::MaxwellEngine::init(int width, int height,  const char* vertShader, co
     
     glfwSetFramebufferSizeCallback(engineWindow, frame_resize);
     
-    engineVertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(engineVertexShader, 1, &vertShader, NULL);
-    glCompileShader(engineVertexShader);
     
-    int compileSuccess;
-    char compileInfoLog[512];
-    glGetShaderiv(engineVertexShader, GL_COMPILE_STATUS, &compileSuccess);
+    obj_id id = this->createShaderProgram(vertShader, fragmentShader);
+    std::cout << "Shader vecID: " << id << std::endl;
     
-    if (!compileSuccess)
-    {
-        glGetShaderInfoLog(engineVertexShader, 512, NULL, compileInfoLog);
-        std::cerr << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << compileInfoLog << std::endl;
-        throw "ERROR::SHADER::VERTEX::COMPILATION_FAILED";
-    }
+    std::cout << "Build: " << vecShaderProgram[id]->build() << std::endl;
     
-    engineFragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(engineFragmentShader, 1, &fragmentShader, NULL);
-    glCompileShader(engineFragmentShader);
+    std::cout << "Shader ID: " << vecShaderProgram[id]->getId() << std::endl;
     
-    glGetShaderiv(engineFragmentShader, GL_COMPILE_STATUS, &compileSuccess);
+    //Must be set after build
+    engineShaderProgram = vecShaderProgram[id]->getId();
     
-    if (!compileSuccess)
-    {
-        glGetShaderInfoLog(engineFragmentShader, 512, NULL, compileInfoLog);
-        std::cerr << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << compileInfoLog << std::endl;
-        throw "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED";
-    }
-    
-    engineShaderProgram = glCreateProgram();
-    glAttachShader(engineShaderProgram, engineVertexShader);
-    glAttachShader(engineShaderProgram, engineFragmentShader);
-    glLinkProgram(engineShaderProgram);
-    
-    int linkSuccess;
-    char linkInfoLog[512];
-    glGetProgramiv(engineShaderProgram, GL_LINK_STATUS, &linkSuccess);
-    
-    if (!linkSuccess)
-    {
-        glGetProgramInfoLog(engineShaderProgram, 512, NULL, linkInfoLog);
-        std::cerr <<  "ERROR::SHADER::PROGRAM::LINK_FAILED\n" << linkInfoLog << std::endl;
-        throw  "ERROR::SHADER::PROGRAM::LINK_FAILED";
-    }
-    
-    //Sets the OpenGL shader program to the inputted object. Pass in 0 to set the OpenGL shader program to the default program.
-    glUseProgram(engineShaderProgram);
+    //FIX BROKEN. I THINK THIS WORKS
+    vecShaderProgram[id]->use();
     
     //Enable depth buffer
     glEnable(GL_DEPTH_TEST);
     
     //IMPORTANT
     //Texture unit configuration: sets fragment shader uniform "customTexture" sampler to 0.
-    glUniform1i(glGetUniformLocation(engineShaderProgram, "customTexture"), 0);
+    vecShaderProgram[id]->setUniform("user_texture_0", glUniform1i, 0);
+    //Texture unit configuration.
+    
+    //CONFIG: Mouse input configuration
+    glfwSetInputMode(engineWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     
     glDeleteShader(engineVertexShader);
     glDeleteShader(engineFragmentShader);
@@ -103,9 +76,18 @@ mes::MaxwellEngine::obj_id mes::MaxwellEngine::createRenderObject(mes::VertexDat
     std::unique_ptr<mes::RenderObject> renderObjectPointer = std::make_unique<mes::RenderObject>();
     renderObjectPointer->init(vdo, indicesArr, indicesSize * sizeof(int));
     
-    vecRenderObject.push_back(std::move(renderObjectPointer));
+    obj_id newId(0);
     
-    return vecRenderObject.size() - 1;
+    if(emptyQueue.empty()) {
+        vecRenderObject.push_back(std::move(renderObjectPointer));
+        newId = vecRenderObject.size() - 1;
+    } else {
+        newId = emptyQueue.front();
+        vecRenderObject[newId] = std::move(renderObjectPointer);
+        emptyQueue.pop();
+    }
+    
+    return newId;
 };
 
 //createRenderObject templates
@@ -115,6 +97,18 @@ template mes::MaxwellEngine::obj_id mes::MaxwellEngine::createRenderObject<int>(
 
 template mes::MaxwellEngine::obj_id mes::MaxwellEngine::createRenderObject<double>(mes::VertexDataObject<double>&, std::vector<unsigned int>&);
 
+void mes::MaxwellEngine::deleteRenderObject(const obj_id id)
+{
+    vecRenderObject[id] = nullptr;
+    emptyQueue.push(id);
+}
+
+mes::MaxwellEngine::obj_id mes::MaxwellEngine::createShaderProgram(mes::ShaderFile& vertShader, mes::ShaderFile& fragmentShader)
+{
+    std::unique_ptr<mes::ShaderProgram> shaderProgram_ptr = std::make_unique<mes::ShaderProgram>(vertShader, fragmentShader);
+    vecShaderProgram.push_back(std::move(shaderProgram_ptr));
+    return vecShaderProgram.size() - 1;
+}
 
 void mes::MaxwellEngine::startRenderLoop()
 {
@@ -140,11 +134,17 @@ void mes::MaxwellEngine::renderLoop(handleInput_t handleInput, renderIntercept_t
 {
     while(!glfwWindowShouldClose(engineWindow))
     {
+        //Compute time delta
+        currFrameTime = glfwGetTime();
+        deltaFrameTime = currFrameTime - lastFrameTime;
+        lastFrameTime = currFrameTime;
+        
         //User Input
-        if (handleInput)
+        if (toHandleInput)
         {
             handleInput(engineWindow);
         }
+        
         //Rendering
         
         //Calling the render intercept
@@ -153,20 +153,30 @@ void mes::MaxwellEngine::renderLoop(handleInput_t handleInput, renderIntercept_t
             renderIntercept(*this);
         }
         
+        //TODO make a command queue
+        
         renderFrame();
     }
 }
 
 void mes::MaxwellEngine::renderFrame()
 {
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    //Get user input
+    if (cameraIsInputHandler) {
+        mainCamera.keyHandler(engineWindow, deltaFrameTime);
+    };
     
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     //Binary OR operator used below
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Uses the OpenGL state clear color to clear the screen and clears the depth buffer
     
     for (int i = 0; i < vecRenderObject.size(); ++i)
     {
-        vecRenderObject[i]->render(engineShaderProgram, mainCamera);
+        //TODO create null RenderObject to get rid of if statement
+        if (vecRenderObject[i])
+        {
+          vecRenderObject[i]->render(engineShaderProgram, mainCamera);
+        }
     }
     
     //Swap back buffer with front buffer (displayed image)
@@ -174,6 +184,43 @@ void mes::MaxwellEngine::renderFrame()
     //Check events (Keyboard pressed or mouse movement)
     glfwPollEvents();
 }
+
+//TODO delete this?
+void mes::MaxwellEngine::addInputHandler(const handleInput_t& handler)
+{
+    if (!toHandleInput) {
+        toHandleInput = true;
+    }
+    vecHandleInput.push_back(handler);
+}
+
+void mes::MaxwellEngine::cursorHandler(GLFWwindow *window, double x, double y)
+{
+    if (staticCameraPtr) {
+        staticCameraPtr->cursorHandler(window, x, y);
+    }
+}
+
+//TODO look at hpp file for notes
+void mes::MaxwellEngine::mountStaticCamera()
+{
+    cameraIsInputHandler = true;
+    cursorHandlerMounted = true;
+    keyHandlerMounted = true;
+    staticCameraPtr = &mainCamera;
+}
+
+void mes::MaxwellEngine::enableCursorHanler()
+{
+    handleCursorConfig = true;
+    glfwSetCursorPosCallback(engineWindow, cursorHandler);
+}
+
+void mes::MaxwellEngine::enableKeyHandler()
+{
+    handleKeyConfig = true;
+}
+
 
 void mes::MaxwellEngine::stopRenderLoop()
 {

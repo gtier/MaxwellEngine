@@ -6,9 +6,11 @@ layout (location = 1) in vec2 inUv;
 out vec4 outColor;
 out vec2 uv;
 
+//ENGINE NEEDS THESE UNIFORMS. DO NOT DELETE OR AUGMENT.
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+//
 
 void main()
 {
