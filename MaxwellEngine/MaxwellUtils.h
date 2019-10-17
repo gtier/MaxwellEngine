@@ -10,7 +10,6 @@
 #define MaxwellUtils_h
 
 #include <memory>
-#include <vector>
 
 namespace mes {
     typedef std::unique_ptr<std::vector<float>> VectorFloat_uptr;

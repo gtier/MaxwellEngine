@@ -42,7 +42,7 @@ template void mes::RenderObject::init<double>(mes::VertexDataObject<double>&, un
 
 void mes::RenderObject::addTexture(const mes::TextureObject& textureObject)
 {
-    vec_texture_uptr.push_back(std::make_unique<mes::TextureObject>(textureObject));
+    texture_uptr = std::make_unique<mes::TextureObject>(textureObject);
 }
 
 glm::mat4& mes::RenderObject::getModelMatrix()
@@ -64,15 +64,10 @@ void mes::RenderObject::render(const unsigned int shaderProgram_id, const mes::C
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram_id, "view"), 1, GL_FALSE, glm::value_ptr(camera.getViewMatrix()));
     
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram_id, "projection"), 1, GL_FALSE, glm::value_ptr(camera.getProjectionMatrix()));
-    int count(0);
     
-    //Empty texture
-    glBindTexture(GL_TEXTURE_2D, 0);
-    for (auto texture_it = vec_texture_uptr.begin(); texture_it != vec_texture_uptr.end(); ++texture_it, count += 1) {
-        if (*texture_it) {
-            glActiveTexture(GL_TEXTURE0 + count);
-            glBindTexture(GL_TEXTURE_2D, (*texture_it)->getTexture());
-        }
+    if (texture_uptr) {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture_uptr->getTexture());
     }
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, EBO_size, GL_UNSIGNED_INT, 0);

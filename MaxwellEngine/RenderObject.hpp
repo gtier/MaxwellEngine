@@ -18,7 +18,7 @@ class mes::RenderObject
 {
 private:
     unsigned int VAO, VBO, EBO, EBO_size;
-    std::vector<std::unique_ptr<mes::TextureObject> > vec_texture_uptr;
+    std::unique_ptr<mes::TextureObject> texture_uptr;
     glm::mat4 modelMatrix;
     
 public:
@@ -28,14 +28,6 @@ public:
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
         glGenBuffers(1, &EBO);
-    }
-    
-    ~RenderObject()
-    {
-        glDeleteBuffers(1, &VBO);
-        glDeleteBuffers(1, &EBO);
-        glDeleteVertexArrays(1, &VAO);
-        std::cout << "RenderObject destroyed" << std::endl;
     }
     
     template<class T>
